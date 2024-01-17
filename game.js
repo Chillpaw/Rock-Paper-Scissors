@@ -31,6 +31,7 @@ function checkGameOver() {
     } else
         if (computerPoints >= 3) {
             console.log(`Comiserations. You lost...! ${computerPoints} - ${playerPoints}`);
+            document.getElementById("gameEndMessage").textContent = `Comiserations. You lost...! ${computerPoints} - ${playerPoints}`
             return true;
         }
         else return false;
