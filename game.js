@@ -6,14 +6,27 @@ console.log("Welcome, best of 5 wins!");
 
 let gameOver = false;
 
-while (!gameOver) {
-    round();
-    gameOver = checkGameOver();
+document.getElementById("rock").addEventListener("click", () => playGameOnClick("rock"));
+document.getElementById("paper").addEventListener("click", () => playGameOnClick("paper"));
+document.getElementById("scissors").addEventListener("click", () => playGameOnClick("scissors"));
+
+document.getElementById("reset").addEventListener("click", () => resetGame());
+
+function playGameOnClick(playerSelection) {
+    let computerSelection = getComputerSelection();
+    document.getElementById("computerSelection").textContent = `Your opponent selected ${computerSelection}!`
+    let result = playRound(playerSelection, computerSelection);
+    document.getElementById("result").textContent = result;
+    document.getElementById("gameEndMessage").textContent = "";
+    updatePoints();
+
+    if (checkGameOver()) resetGame();
 }
 
 function checkGameOver() {
     if (playerPoints >= 3) {
         console.log(`Congratulations! You won! ${playerPoints} - ${computerPoints}`);
+        document.getElementById("gameEndMessage").textContent = `Congratulations! You won! ${playerPoints} - ${computerPoints}`;
         return true;
     } else
         if (computerPoints >= 3) {
@@ -21,6 +34,18 @@ function checkGameOver() {
             return true;
         }
         else return false;
+}
+
+function updatePoints() {
+    document.getElementById("playerScore").textContent = playerPoints;
+    document.getElementById("computerScore").textContent = computerPoints;
+}
+
+function resetGame() {
+    playerPoints = 0;
+    computerPoints = 0;
+    updatePoints();
+    document.getElementById("result").textContent = "";
 }
 
 function playRound(playerSelection, computerSelection) {
