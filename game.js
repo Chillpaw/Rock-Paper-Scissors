@@ -80,7 +80,7 @@ function getComputerSelection() {
 function getPlayerSelection() {
     while (true) {
         let input = prompt();
-        input = input.toLowerCase;
+        input = input.toLowerCase();
         if (input === "rock") return "rock";
         else if (input === "paper") return "paper";
         else if (input === "scissors") return "scissors";
